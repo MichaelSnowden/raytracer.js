@@ -101,7 +101,7 @@ function Raytracer(obj) {
 	this.camera = obj.camera || [0, 1, 0];
 	this.lights = obj.lights || [[2, 2, 0]];
 	this.ambient = obj.ambient || 0.5;
-	this.depth = obj.depth || depth;
+	this.depth = obj.depth || 3;
 	this.shapes = obj.shapes || [makeSphere(1, [0, 0, 3], [1, 0, 0])];
 	this.canvas = obj.canvas || document.createElement("canvas");
 	if (!obj.canvas) {
