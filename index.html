@@ -12,6 +12,52 @@
     <![endif]-->
     <title>Raytracer.js by MichaelSnowden</title>
   </head>
+  <script src="https://raw.githubusercontent.com/MichaelSnowden/raytracer.js/master/raytracer.js"></script>
+  <script>
+			var raytracer;
+			function start() {
+				raytracer = new Raytracer({
+					width: 200,
+					height: 200,
+					backgroundColor: [0, 0, 0],
+					camera: [0, 1, 0],
+					lights: [[-2, 2, 0], [2, 2, 0]],
+					ambient: 0.5,
+					depth: 3,
+					parent: document.getElementById("raytracerContainer"),
+					shapes: [
+						makeSphere(500, [0, -500, 0], [1, 1, 0]),
+						makeSphere(1, [0, 0, 3], [1, 0, 0]),
+						makeSphere(1, [-2, 1, 4], [0, 1, 0]),
+						makeSphere(1, [2, 1, 4], [0, 0, 1]),
+						makeSphere(1.0, [0.0, 0.0, 3.0], [1.0, 0.0, 0.0])
+					]
+				});
+				raytracer.render();
+			}
+
+			document.onkeydown = checkKey;
+
+			function checkKey(e) {
+
+			    e = e || window.event;
+
+			    if (e.keyCode == '38') {
+			        raytracer.camera[2] += 0.1;
+			    }
+			    else if (e.keyCode == '40') {
+			        raytracer.camera[2] -= 0.1;
+			    }
+			    else if (e.keyCode == '37') {
+			       raytracer.camera[0] -= 0.1;
+			    }
+			    else if (e.keyCode == '39') {
+			       raytracer.camera[0] += 0.1;
+			    }
+			    raytracer.render();
+			}
+			window.onload = start;
+		</script>
 
   <body>
     <div id="container">
@@ -19,7 +65,7 @@
 
         <header>
           <h1>Raytracer.js</h1>
-          <iframe src="https://raw.githubusercontent.com/MichaelSnowden/raytracer.js/master/raytracer.html"></iframe>
+          <div id="raytracerContainer"></div>
           <h2>Just a simple JavaScript raytracer</h2>
         </header>
 
