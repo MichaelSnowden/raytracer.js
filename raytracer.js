@@ -59,7 +59,7 @@ function trace(shapes, ambient, lights, backgroundColor, source, direction, dept
 		distance: 999999.0, 
 		normal: null,
 		color: null
-	}
+	};
 
 	function callback(intersection, normal, color) {
 		var distance = distanceTo(source, intersection);
@@ -81,10 +81,9 @@ function trace(shapes, ambient, lights, backgroundColor, source, direction, dept
 		return backgroundColor;
 	}
 
-	var direct = hit.color;
 	var intensity = 0;
 	for (var light of lights) {
-		var intensity = Math.max(ambient, intensity, dot(normalize(sub(light, hit.intersection)), hit.normal));
+		intensity = Math.max(ambient, intensity, dot(normalize(sub(light, hit.intersection)), hit.normal));
 	}
 	var direct = scale(hit.color, intensity);
 	if (depth == 1) {
@@ -120,11 +119,11 @@ function Raytracer(obj) {
 Raytracer.prototype.drawPixel = function(x, y, r, g, b, a) {
     var index = (x + y * this.canvas.width) * 4;
 
-    this.canvasData.data[index + 0] = r;
+    this.canvasData.data[index] = r;
     this.canvasData.data[index + 1] = g;
     this.canvasData.data[index + 2] = b;
     this.canvasData.data[index + 3] = a;
-}
+};
 
 Raytracer.prototype.render = function() {
 	for (var x = 0; x < this.canvas.width; ++x) {
@@ -135,4 +134,4 @@ Raytracer.prototype.render = function() {
 		}
 	}
 	this.context.putImageData(this.canvasData, 0, 0);
-}
+};
