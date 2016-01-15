@@ -1,99 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <title>Raytracer.js by MichaelSnowden</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-  <script src="https://rawgit.com/MichaelSnowden/raytracer.js/master/raytracer.js" type="text/javascript"></script>
-  <script>
-			var raytracer;
-			function start() {
-				raytracer = new Raytracer({
-					width: 200,
-					height: 200,
-					backgroundColor: [0, 0, 0],
-					camera: [0, 1, 0],
-					lights: [[-2, 2, 0], [2, 2, 0]],
-					ambient: 0.5,
-					depth: 3,
-					parent: document.getElementById("raytracerContainer"),
-					shapes: [
-						makeSphere(500, [0, -500, 0], [1, 1, 0]),
-						makeSphere(1, [0, 0, 3], [1, 0, 0]),
-						makeSphere(1, [-2, 1, 4], [0, 1, 0]),
-						makeSphere(1, [2, 1, 4], [0, 0, 1]),
-						makeSphere(1.0, [0.0, 0.0, 3.0], [1.0, 0.0, 0.0])
-					]
-				});
-				raytracer.render();
-			}
-
-			document.onkeydown = checkKey;
-
-			function checkKey(e) {
-			    e = e || window.event;
-			    e.preventDefault();
-
-			    if (e.keyCode == '38') {
-			        raytracer.camera[2] += 0.1;
-			    }
-			    else if (e.keyCode == '40') {
-			        raytracer.camera[2] -= 0.1;
-			    }
-			    else if (e.keyCode == '37') {
-			       raytracer.camera[0] -= 0.1;
-			    }
-			    else if (e.keyCode == '39') {
-			       raytracer.camera[0] += 0.1;
-			    }
-			    raytracer.render();
-			}
-			window.onload = start;
-		</script>
-
   <body>
-    <div id="container">
-      <div class="inner">
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/MichaelSnowden/raytracer.js">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/MichaelSnowden/raytracer.js/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/MichaelSnowden/raytracer.js/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-        <header>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
           <h1>Raytracer.js</h1>
-          <h2>Just a simple JavaScript raytracer</h2>
-        </header>
+          <p>Just a simple JavaScript raytracer</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/MichaelSnowden">MichaelSnowden</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/MichaelSnowden/raytracer.js/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/MichaelSnowden/raytracer.js/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/MichaelSnowden/raytracer.js" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h3>
+        <h3>
 <a id="javascript-raytracer" class="anchor" href="#javascript-raytracer" aria-hidden="true"><span class="octicon octicon-link"></span></a>JavaScript Raytracer</h3>
-<div id="raytracerContainer"></div>
+
+<ul>
+<li>Include the script in your webpage </li>
+</ul>
+
+<pre><code>&lt;script src="https://rawgit.com/MichaelSnowden/raytracer.js/master/raytracer.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<ul>
+<li>Create a raytracer with some properties</li>
+</ul>
+
+<pre><code>raytracer = new Raytracer({parent: document.getElementById("raytracerContainer")});
+</code></pre>
+
+<ul>
+<li>Render the scene</li>
+</ul>
+
+<pre><code>raytracer.render()
+</code></pre>
+
+<ul>
+<li>Add some controls</li>
+</ul>
+
+<pre><code>document.onkey = checkKey;
+
+function checkKey(e) {
+    e = e || window.event;
+    e.preventDefault();
+
+    if (e.keyCode == '38') {
+        raytracer.camera[2] += 0.1;
+    }
+    else if (e.keyCode == '40') {
+        raytracer.camera[2] -= 0.1;
+    }
+    else if (e.keyCode == '37') {
+       raytracer.camera[0] -= 0.1;
+    }
+    else if (e.keyCode == '39') {
+       raytracer.camera[0] += 0.1;
+    }
+    raytracer.render();
+}
+</code></pre>
 
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
 <p>Michael Snowden (<a href="https://github.com/MichaelSnowden" class="user-mention">@MichaelSnowden</a>)</p>
-        </section>
+      </section>
 
-        <footer>
-          Raytracer.js is maintained by <a href="https://github.com/MichaelSnowden">MichaelSnowden</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
     </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
